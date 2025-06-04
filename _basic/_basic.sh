@@ -201,14 +201,17 @@ function package_install() {
     fi
 
     if ! package_check "$pname"; then
-        log_info "start install $pkg"
+        log_installing "$pkg"
         $aur -S "$pkg" --noconfirm --quiet >/dev/null 2>&1
+    else
+        log_installed "${pkg}"
+        return
     fi
     if ! package_check "$pname"; then
-        log_err "install ${pkg}. try manual..."
-        return 1
+        log_err "install ${pkg} error. try manual..."
+        exit 1
     fi
-    log_succ "installed $pkg"
+    log_succ "$pkg"
 }
 
 function package_link() {

@@ -11,12 +11,13 @@ source "${pwd}/../_basic/_basic.sh"
 function main() {
     local name=$(basename ${pwd})
     log_title "${name}"
-    
+
+    package_install "fish"
     if [ ! -d "${xconf}/fish" ]; then
         try_link_dir "${pwd}" "${xconf}/fish"
-        log_installing "${name}"
+        log_installing "${name}_conf"
     else
-        log_installed "${name}"
+        log_installed "${name}_conf"
     fi
     log_succ "${name}"
 }
